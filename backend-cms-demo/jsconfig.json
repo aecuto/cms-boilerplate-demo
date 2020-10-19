@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "database/*": ["./database/*"],
+      "dao/*": ["./dao/*"],
+      "handler/*": ["./handler/*"],
+      "helper/*": ["./helper/*"],
+      "middleware/*": ["./middleware/*"],
+      "models/*": ["./models/*"],
+      "modules/*": ["./modules/*"],
+      "plugins/*": ["./plugins/*"],
+      "routes/*": ["./routes/*"],
+      "view/*": ["./view/*"],
+      "constant/*": ["./constant/*"],
+      "cron/*": ["./cron/*"],
+      "query-builder/*": ["./query-builder/*"]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "localhost": {
+    "REACT_APP_SERVER": "development",
+    "REACT_APP_API_URL": "http://localhost:8000"
+  },
+  "development": {
+    "REACT_APP_SERVER": "development",
+    "REACT_APP_API_URL": "https://cmmrbnaqp4.execute-api.ap-southeast-1.amazonaws.com/dev/"
+  },
+  "staging": {
+    "REACT_APP_SERVER": "staging"
+  },
+  "production": {
+    "REACT_APP_SERVER": "production"
+  }
+}

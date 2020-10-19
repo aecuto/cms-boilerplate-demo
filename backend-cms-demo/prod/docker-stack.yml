@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  service:
+    image: ecr.url/image.name:latest
+    ports:
+      - 8000:8000
+    environment:
+      WAIT_HOSTS: database_mongo:27017
+    networks:
+      - database_network
+      - api_network
+    configs:
+      - source: env-production
+        target: /home/node/app/.env
+    logging:
+      driver: json-file
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == worker
+          - node.labels.node.propose != database
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+        order: start-first
+
+networks:
+  api_network:
+    external: true
+  database_network:
+    external: true
+configs:
+  env-production:
+    external: true

@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  service:
+    build: .
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - 8000:8000
+  #   links:
+  #     - mongo
+  #   environment:
+  #     WAIT_HOSTS: mongo:27017
+  # mongo:
+  #   image: mongo
+  #   volumes: 
+  #     - ./mongo:/data/db
+  #   ports:
+  #     - 27018:27017
