@@ -2,8 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import ViewComponent from './index.view';
-import routeUrlProvider, { USER_LIST } from 'constants/route-paths';
-import { currentLayoutState } from 'utils/layout';
+import routeUrlProvider, { LOGIN } from 'constants/route-paths';
 import { create } from 'services/users';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -20,15 +19,7 @@ const Component = ({ theme, history }) => {
   });
 
   const onSubmit = values => {
-    create(values).then(() =>
-      history.push({
-        pathname: routeUrlProvider.getForLink(USER_LIST),
-        state: {
-          ...currentLayoutState(history.location),
-          menuSelected: USER_LIST
-        }
-      })
-    );
+    create(values).then(() => history.push(routeUrlProvider.getForLink(LOGIN)));
   };
 
   const props = {
