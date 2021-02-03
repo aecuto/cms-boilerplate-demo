@@ -1,10 +1,12 @@
 import React from 'react';
+
 import routeUrlProvider, {
   LOGIN,
   DASHBOARD,
   USER_CREATE,
   USER_LIST,
   USER_EDIT,
+  USER_REGISTER,
   PRODUCT_TABLE
 } from 'constants/route-paths';
 
@@ -16,6 +18,7 @@ import Dashboard from './pages/Dashboard';
 import UserCreate from './pages/User/Create';
 import UserList from './pages/User/List';
 import UserEdit from './pages/User/Edit';
+import UserRegister from './pages/User/Register';
 import ProductTable from './pages/ProductTable';
 
 const Router = () => {
@@ -26,6 +29,12 @@ const Router = () => {
         path={routeUrlProvider.getForRoute(LOGIN)}
         component={Login}
       />
+      <PublicRoute
+        exact
+        path={routeUrlProvider.getForRoute(USER_REGISTER)}
+        component={UserRegister}
+      />
+
       <PrivateRoute
         exact
         path={routeUrlProvider.getForRoute(DASHBOARD)}

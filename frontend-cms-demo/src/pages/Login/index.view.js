@@ -20,7 +20,7 @@ const Paper = styled(MuiPaper)`
   }
 `;
 
-const LoginView = ({ onSubmit }) => {
+const LoginView = ({ onSubmit, onRegister }) => {
   const { t } = useTranslation();
   return (
     <Container>
@@ -74,6 +74,18 @@ const LoginView = ({ onSubmit }) => {
                         Submit
                       </Button>
                     </Grid>
+
+                    <Grid item xs={12}>
+                      <Button
+                        variant="outlined"
+                        color="secondary"
+                        type="submit"
+                        fullWidth
+                        onClick={() => onRegister()}
+                      >
+                        Register
+                      </Button>
+                    </Grid>
                   </Grid>
                 </form>
               )}
@@ -86,6 +98,7 @@ const LoginView = ({ onSubmit }) => {
 };
 
 LoginView.propTypes = {
+  onRegister: PropTypes.any,
   onSubmit: PropTypes.func
 };
 

@@ -10,7 +10,10 @@ import LoginView from './index.view';
 import { login } from 'services/auth';
 import { setToken } from 'services/auth/token';
 
-import routeUrlProvider, { DASHBOARD } from 'constants/route-paths';
+import routeUrlProvider, {
+  DASHBOARD,
+  USER_REGISTER
+} from 'constants/route-paths';
 
 const Login = ({ theme, history }) => {
   const muiTheme = createMuiTheme({
@@ -30,8 +33,13 @@ const Login = ({ theme, history }) => {
       .catch(error => ({ [FORM_ERROR]: error.message }));
   };
 
+  const onRegister = () => {
+    history.push(routeUrlProvider.getForLink(USER_REGISTER));
+  };
+
   const props = {
-    onSubmit
+    onSubmit,
+    onRegister
   };
 
   return (
