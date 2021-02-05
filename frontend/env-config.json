@@ -1,7 +1,7 @@
 {
   "localhost": {
     "REACT_APP_SERVER": "development",
-    "REACT_APP_API_URL": "http://localhost:8000"
+    "REACT_APP_API_URL": "http://localhost:8888/dev/"
   },
   "development": {
     "REACT_APP_SERVER": "development",

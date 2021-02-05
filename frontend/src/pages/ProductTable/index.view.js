@@ -12,12 +12,14 @@ const ProductTableView = () => {
   ];
 
   const fetchList = query => {
+    console.log(query);
     return getList({
       ...query,
       page: query.page + 1,
       perPage: query.pageSize
     }).then(res => {
       const { current_page, total } = res.pagination;
+
       return {
         data: res.data,
         page: current_page - 1,
