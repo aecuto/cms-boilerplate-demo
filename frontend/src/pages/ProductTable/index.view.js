@@ -12,7 +12,6 @@ const ProductTableView = () => {
   ];
 
   const fetchList = query => {
-    console.log(query);
     return getList({
       ...query,
       page: query.page + 1,
