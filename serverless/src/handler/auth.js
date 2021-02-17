@@ -1,11 +1,18 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
+const moment = require('moment');
 dotenv.config();
 
 const UserModel = require('../models/User');
 const database = require('../database');
 const bang = require('../utils/bang');
+
+const signJwtToken = user => {
+  return jwt.sign({ user }, process.env.JWT_SECRET, {
+    expiresIn: '10s'
+  });
+};
 
 module.exports.login = async (event, context, callback) => {
   const { email, password } = JSON.parse(event.body);
@@ -24,9 +31,7 @@ module.exports.login = async (event, context, callback) => {
       return bang.badRequest(errorMessage);
     }
 
-    const token = jwt.sign({ user }, process.env.JWT_SECRET, {
-      expiresIn: '7d'
-    });
+    const token = signJwtToken(user);
 
     return bang.ok({ token });
   } catch (error) {
@@ -75,4 +80,29 @@ module.exports.me = async (event, context, callback) => {
   const user = JSON.parse(event.requestContext.authorizer.user);
 
   return bang.ok(user);
+};
+
+module.exports.refreshToken = async (event, context, callback) => {
+  try {
+    const token = event.headers.Authorization.replace('Bearer ', '');
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET, {
+      ignoreExpiration: true
+    });
+
+    const exp = moment(decoded.exp * 1000);
+    const currentDate = moment();
+    const diffInMs = currentDate.diff(exp);
+    const tokenStatus = diffInMs > 0 ? 'token expired' : 'ok';
+
+    if (moment.duration(diffInMs).asMinutes() < 5) {
+      const refreshToken = signJwtToken(decoded.user);
+      return bang.ok({ tokenStatus, refreshToken });
+    } else {
+      return bang.Unauthorized();
+    }
+  } catch (error) {
+    console.error(error);
+    return bang.badImplementation();
+  }
 };

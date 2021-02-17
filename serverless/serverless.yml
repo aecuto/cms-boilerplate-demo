@@ -40,6 +40,14 @@ functions:
           method: post
           <<: *cors
 
+  refreshToken:
+    handler: src/handler/auth.refreshToken
+    events:
+      - http:
+          path: refreshToken
+          method: get
+          <<: *cors
+
   me:
     handler: src/handler/auth.me
     events:
