@@ -20,7 +20,7 @@ const ProductTableView = () => {
       const { current_page, total } = res.pagination;
 
       return {
-        data: res.data,
+        data: res.results,
         page: current_page - 1,
         totalCount: total
       };
