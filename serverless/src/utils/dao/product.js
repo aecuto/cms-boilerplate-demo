@@ -27,5 +27,5 @@ module.exports.getList = async (search, page = 1, perPage = 10, sort) => {
     listData = await queryBuilder.getList(model, query);
   }
 
-  return { data: listData, pagination };
+  return { results: listData, pagination };
 };

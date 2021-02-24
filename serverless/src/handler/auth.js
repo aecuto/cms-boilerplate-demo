@@ -10,7 +10,7 @@ const bang = require('../utils/bang');
 
 const signJwtToken = user => {
   return jwt.sign({ user }, process.env.JWT_SECRET, {
-    expiresIn: '10s'
+    expiresIn: '7d'
   });
 };
 
@@ -95,7 +95,7 @@ module.exports.refreshToken = async (event, context, callback) => {
     const diffInMs = currentDate.diff(exp);
     const tokenStatus = diffInMs > 0 ? 'token expired' : 'ok';
 
-    if (moment.duration(diffInMs).asMinutes() < 5) {
+    if (moment.duration(diffInMs).asMinutes() < 2) {
       const refreshToken = signJwtToken(decoded.user);
       return bang.ok({ tokenStatus, refreshToken });
     } else {
