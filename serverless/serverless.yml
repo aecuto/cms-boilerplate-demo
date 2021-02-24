@@ -7,7 +7,9 @@ plugins:
 
 custom:
   serverless-offline:
+    host: 0.0.0.0
     httpPort: 8888
+    useDocker: true
 
 provider:
   name: aws
