@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "handler.js",
   "scripts": {
-    "start": "nodemon --exec sls offline"
+    "start": "sls offline",
+    "start:dev": "nodemon --exec sls offline"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
